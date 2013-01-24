@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "viewable"
   gem.homepage = "http://github.com/foxnewsnetwork/viewable"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Standardizing interface for building views.}
+  gem.description = %Q{Standard interface for building views.}
   gem.email = "foxnewsnetwork@gmail.com"
   gem.authors = ["Thomas Chen"]
   # dependencies defined in Gemfile
@@ -32,15 +32,16 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
-require 'rcov/rcovtask'
-Rcov::RcovTask.new do |test|
-  test.libs << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-  test.rcov_opts << '--exclude "gems/*"'
+if RUBY_VERSION < "1.9.0"
+  require 'rcov/rcovtask'
+  Rcov::RcovTask.new do |test|
+    test.libs << 'test'
+    test.pattern = 'test/**/test_*.rb'
+    test.verbose = true
+    test.rcov_opts << '--exclude "gems/*"'
+  end
 end
 
-task :default => :test
 
 require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
