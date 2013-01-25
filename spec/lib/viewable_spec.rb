@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+require_all_spec_files_in "viewable"
+
 describe Viewable do
 
   describe "api" do
