@@ -12,7 +12,8 @@ module Viewable
     def self.extended(base)
       # Setting a default renderer
       if base.superclass.respond_to? :renderer
-        base.setup_renderer base.superclass.renderer
+        # base.setup_renderer base.superclass.renderer
+        # AFAIK, I don't think I will need this feature
       else
         base.setup_renderer Renderer
       end

@@ -6,6 +6,13 @@ describe Viewable::Context do
     subject { Viewable::Context.superclass }
 
     it { should eq IOMatic::Monadic::Context }
+
+  end
+
+  describe "introspection" do
+    subject { Viewable::Context }
+
+    it { should be_include IOMatic::Dispatchable }
   end
 
   describe "api" do
@@ -15,17 +22,26 @@ describe Viewable::Context do
     end
 
     describe "dynamic" do
-      before :each do
-        c = Class.new
-        c.any_instance.should_receive(:call).with(instance_of ContextTest).and_return(Viewable::Context.new ContextTest.new)
-        ContextTest.setup_renderer c
-      end
 
       let(:api) { ContextTest.new.render }
 
+      describe "#dispatch" do
+        
+        it "should give me an instance" do
+          api.should respond_to :dispatch
+        end
+
+        it "should return nil" do
+          api.dispatch.should be_a Viewable::Context
+        end
+
+      end
+
       describe "#collections" do
         let(:collections) { api.collections }
-
+        before :each do
+          api.collections << Viewable::Context.new
+        end
         it "should give me an array" do
           collections.should be_a Array
         end
@@ -38,6 +54,9 @@ describe Viewable::Context do
 
       describe "#metadata" do
         let(:metadata) { api.metadata }
+        before :each do
+          api.metadata << "s"
+        end
 
         it "should give me an array" do
           metadata.should be_a Array
@@ -54,6 +73,9 @@ describe Viewable::Context do
       describe "#data" do
         let(:data) { api.data }
 
+        before :each do
+          api.data << "s"
+        end
         it "should give me an array" do
           data.should be_a Array 
         end

@@ -3,7 +3,7 @@ source "http://rubygems.org"
 # Example:
 #   gem "activesupport", ">= 2.3.5"
 
-gem "iomatic"
+gem "iomatic", "2.0.0"
 gem "activesupport"
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.

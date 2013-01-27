@@ -11,5 +11,5 @@ module Viewable
       include InstanceMethods
     end
   end
-
+  
 end
